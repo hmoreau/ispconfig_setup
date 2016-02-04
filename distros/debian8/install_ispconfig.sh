@@ -51,7 +51,7 @@ InstallISPConfig() {
 	  echo "configure_apache=y" >> autoinstall.ini
 	  echo "configure_nginx=n" >> autoinstall.ini
 	  echo "configure_firewall=y" >> autoinstall.ini
-	  echo "install_ispconfig_web_interface=y" >> autoinstall.ini
+	  echo "install_ispconfig_web_interface=$CFG_INTERFACE" >> autoinstall.ini
 	  echo
 	  echo "[update]" >> autoinstall.ini
 	  echo "do_backup=yes" >> autoinstall.ini

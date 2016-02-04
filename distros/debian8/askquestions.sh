@@ -64,6 +64,12 @@ AskQuestions() {
 		CFG_DKIM=n
 	  fi
 	  
+	  if (whiptail --title "ISP Interface" --backtitle "$WT_BACKTITLE" --yesno "Would you like to install the ISPConfig Interface?" 10 50) then
+		CFG_INTERFACE=y
+	  else
+		CFG_INTERFACE=n
+	  fi
+	  
 	  CFG_WEBMAIL=squirrelmail
 	  
 	  SSL_COUNTRY=$(whiptail --title "SSL Country" --backtitle "$WT_BACKTITLE" --inputbox "SSL Configuration - Country (ex. EN)" --nocancel 10 50 3>&1 1>&2 2>&3)

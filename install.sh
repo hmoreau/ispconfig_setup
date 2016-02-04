@@ -44,20 +44,20 @@ CheckLinux
 source $PWD/distros/$DISTRO/preinstallcheck.sh
 source $PWD/distros/$DISTRO/askquestions.sh
 source $PWD/distros/$DISTRO/install_basics.sh
-source $PWD/distros/$DISTRO/install_postfix.sh
+#source $PWD/distros/$DISTRO/install_postfix.sh
 source $PWD/distros/$DISTRO/install_mysql.sh
-source $PWD/distros/$DISTRO/install_mta.sh
-source $PWD/distros/$DISTRO/install_antivirus.sh
+#source $PWD/distros/$DISTRO/install_mta.sh
+#source $PWD/distros/$DISTRO/install_antivirus.sh
 source $PWD/distros/$DISTRO/install_webserver.sh
 source $PWD/distros/$DISTRO/install_ftp.sh
 source $PWD/distros/$DISTRO/install_quota.sh
-source $PWD/distros/$DISTRO/install_bind.sh
+#source $PWD/distros/$DISTRO/install_bind.sh
 source $PWD/distros/$DISTRO/install_webstats.sh
 source $PWD/distros/$DISTRO/install_jailkit.sh
 source $PWD/distros/$DISTRO/install_fail2ban.sh
-source $PWD/distros/$DISTRO/install_webmail.sh
+#source $PWD/distros/$DISTRO/install_webmail.sh
 source $PWD/distros/$DISTRO/install_ispconfig.sh
-source $PWD/distros/$DISTRO/install_fix.sh
+#source $PWD/distros/$DISTRO/install_fix.sh
 
 #---------------------------------------------------------------------
 # Main program [ main() ]
@@ -109,24 +109,24 @@ if [ -f /etc/debian_version ]; then
   PreInstallCheck
   AskQuestions 
   InstallBasics 2>> /var/log/ispconfig_setup.log
-  InstallPostfix 2>> /var/log/ispconfig_setup.log
+  #InstallPostfix 2>> /var/log/ispconfig_setup.log
   InstallSQLServer 2>> /var/log/ispconfig_setup.log
-  InstallMTA 2>> /var/log/ispconfig_setup.log
-  InstallAntiVirus 2>> /var/log/ispconfig_setup.log
+  #InstallMTA 2>> /var/log/ispconfig_setup.log
+  #InstallAntiVirus 2>> /var/log/ispconfig_setup.log
   InstallWebServer
   InstallFTP 2>> /var/log/ispconfig_setup.log
   if [ $CFG_QUOTA == "y" ]; then
 	InstallQuota 2>> /var/log/ispconfig_setup.log
   fi
-  InstallBind 2>> /var/log/ispconfig_setup.log
+  #InstallBind 2>> /var/log/ispconfig_setup.log
   InstallWebStats 2>> /var/log/ispconfig_setup.log
   if [ $CFG_JKIT == "y" ]; then
 	InstallJailkit 2>> /var/log/ispconfig_setup.log
   fi
   InstallFail2ban 2>> /var/log/ispconfig_setup.log
-  InstallWebmail 2>> /var/log/ispconfig_setup.log
+  #InstallWebmail 2>> /var/log/ispconfig_setup.log
   InstallISPConfig
-  InstallFix
+  # InstallFix
   echo -e "${green}Well done ISPConfig installed and configured correctly :D ${NC}"
   echo "Now you can connect to your ISPConfig installation at https://$CFG_HOSTNAME_FQDN:8080 or https://IP_ADDRESS:8080"
   echo "You can visit my GitHub profile at https://github.com/servisys/ispconfig_setup/"
@@ -148,22 +148,22 @@ else
 		PreInstallCheck
 		AskQuestions 
 		InstallBasics 2>> /var/log/ispconfig_setup.log
-		InstallPostfix 2>> /var/log/ispconfig_setup.log
+		#InstallPostfix 2>> /var/log/ispconfig_setup.log
 		InstallSQLServer 2>> /var/log/ispconfig_setup.log
-		InstallMTA 2>> /var/log/ispconfig_setup.log
-		InstallAntiVirus 2>> /var/log/ispconfig_setup.log
+		#InstallMTA 2>> /var/log/ispconfig_setup.log
+		#InstallAntiVirus 2>> /var/log/ispconfig_setup.log
 		InstallWebServer
 		InstallFTP 2>> /var/log/ispconfig_setup.log
 		#if [ $CFG_QUOTA == "y" ]; then
 		#		InstallQuota 2>> /var/log/ispconfig_setup.log
 		#fi
-		InstallBind 2>> /var/log/ispconfig_setup.log
+		#InstallBind 2>> /var/log/ispconfig_setup.log
         InstallWebStats 2>> /var/log/ispconfig_setup.log
 	    if [ $CFG_JKIT == "y" ]; then
 			InstallJailkit 2>> /var/log/ispconfig_setup.log
 	    fi
 		InstallFail2ban 2>> /var/log/ispconfig_setup.log
-		InstallWebmail 2>> /var/log/ispconfig_setup.log
+		#InstallWebmail 2>> /var/log/ispconfig_setup.log
 		InstallISPConfig
 		#InstallFix
 		echo -e "${green}Well done ISPConfig installed and configured correctly :D ${NC}"
@@ -177,4 +177,3 @@ else
 fi
 
 exit 0
-
