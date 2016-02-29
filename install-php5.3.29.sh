@@ -5,37 +5,37 @@ apt-get install libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dbg libmcrypt-dev libss
 ln -s /usr/lib/libc-client.a /usr/lib/x86_64-linux-gnu/libc-client.a
 
 
-mkdir -p /opt/php-5.4.45
+mkdir -p /opt/php-5.3.29
 mkdir /usr/local/src/php5-build
 cd /usr/local/src/php5-build
-wget http://de1.php.net/get/php-5.4.45.tar.bz2/from/this/mirror -O php-5.4.45.tar.bz2
-tar jxf php-5.4.45.tar.bz2
-cd php-5.4.45/
+wget http://de1.php.net/get/php-5.3.29.tar.bz2/from/this/mirror -O php-5.3.29.tar.bz2
+tar jxf php-5.3.29.tar.bz2
+cd php-5.3.29/
 ./configure --help
-./configure --prefix=/opt/php-5.4.45 --with-pdo-pgsql --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-soap --enable-calendar --with-curl --with-mcrypt --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-pdo-mysql --with-mysqli --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-jpeg-dir=/usr --with-png-dir=/usr --enable-gd-native-ttf --with-openssl --with-fpm-user=www-data --with-fpm-group=www-data --with-libdir=/lib/x86_64-linux-gnu --enable-ftp --with-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm
+./configure --prefix=/opt/php-5.3.29 --with-pdo-pgsql --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-soap --enable-calendar --with-curl --with-mcrypt --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-pdo-mysql --with-mysqli --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-jpeg-dir=/usr --with-png-dir=/usr --enable-gd-native-ttf --with-openssl --with-fpm-user=www-data --with-fpm-group=www-data --with-libdir=/lib/x86_64-linux-gnu --enable-ftp --with-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm
 make
 make install
-cp /usr/local/src/php5-build/php-5.4.45/php.ini-production /opt/php-5.4.45/lib/php.ini
-cp /opt/php-5.4.45/etc/php-fpm.conf.default /opt/php-5.4.45/etc/php-fpm.conf
-mkdir /opt/php-5.4.45/etc/php-fpm.d
-echo "include=/opt/php-5.4.45/etc/php-fpm.d/*.conf" >> /opt/php-5.4.45/etc/php-fpm.conf
-cp /opt/php-5.4.45/etc/php-fpm.conf.default /opt/php-5.4.45/etc/php-fpm.d/www.conf
-sed -i 's/9000/9012/g' /opt/php-5.4.45/etc/php-fpm.d/www.conf
+cp /usr/local/src/php5-build/php-5.3.29/php.ini-production /opt/php-5.3.29/lib/php.ini
+cp /opt/php-5.3.29/etc/php-fpm.conf.default /opt/php-5.3.29/etc/php-fpm.conf
+mkdir /opt/php-5.3.29/etc/php-fpm.d
+echo "include=/opt/php-5.3.29/etc/php-fpm.d/*.conf" >> /opt/php-5.3.29/etc/php-fpm.conf
+cp /opt/php-5.3.29/etc/php-fpm.conf.default /opt/php-5.3.29/etc/php-fpm.d/www.conf
+sed -i 's/9000/9014/g' /opt/php-5.3.29/etc/php-fpm.d/www.conf
 
-cat <<EOF >/etc/init.d/php-5.4.45-fpm
+cat <<EOF >/etc/init.d/php-5.3.29-fpm
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          php-5.4.45-fpm
+# Provides:          php-5.3.29-fpm
 # Required-Start:    $all
 # Required-Stop:     $all
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: starts php-5.4.45-fpm
+# Short-Description: starts php-5.3.29-fpm
 # Description:       starts the PHP FastCGI Process Manager daemon
 ### END INIT INFO
-php_fpm_BIN=/opt/php-5.4.45/sbin/php-fpm
-php_fpm_CONF=/opt/php-5.4.45/etc/php-fpm.conf
-php_fpm_PID=/opt/php-5.4.45/var/run/php-fpm.pid
+php_fpm_BIN=/opt/php-5.3.29/sbin/php-fpm
+php_fpm_CONF=/opt/php-5.3.29/etc/php-fpm.conf
+php_fpm_PID=/opt/php-5.3.29/var/run/php-fpm.pid
 php_opts="--fpm-config $php_fpm_CONF"
 wait_for_pid () {
         try=0
@@ -128,18 +128,18 @@ EOF
 
 
 
-chmod 755 /etc/init.d/php-5.4.45-fpm
-insserv php-5.4.45-fpm
+chmod 755 /etc/init.d/php-5.3.29-fpm
+insserv php-5.3.29-fpm
 
-cat <<EOF >/lib/systemd/system/php-5.4.45-fpm.service
+cat <<EOF >/lib/systemd/system/php-5.3.29-fpm.service
 [Unit]
 Description=The PHP 5 FastCGI Process Manager
 After=network.target
 
 [Service]
 Type=simple
-PIDFile=/opt/php-5.4.45/var/run/php-fpm.pid
-ExecStart=/opt/php-5.4.45/sbin/php-fpm --nodaemonize --fpm-config /opt/php-5.4.45/etc/php-fpm.conf
+PIDFile=/opt/php-5.3.29/var/run/php-fpm.pid
+ExecStart=/opt/php-5.3.29/sbin/php-fpm --nodaemonize --fpm-config /opt/php-5.3.29/etc/php-fpm.conf
 ExecReload=/bin/kill -USR2 $MAINPID
 
 [Install]
@@ -149,7 +149,7 @@ EOF
 
 
 
-systemctl enable php-5.4.45-fpm.service
+systemctl enable php-5.3.29-fpm.service
 systemctl daemon-reload
 
-systemctl start php-5.4.45-fpm.service
+systemctl start php-5.3.29-fpm.service
