@@ -29,26 +29,26 @@ InstallISPConfig() {
 	  echo "ispconfig_use_ssl=y" >> autoinstall.ini
 	  echo
 	  echo "[ssl_cert]" >> autoinstall.ini
-	  echo "ssl_cert_country=IT" >> autoinstall.ini
-	  echo "ssl_cert_state=Italy" >> autoinstall.ini
-	  echo "ssl_cert_locality=Udine" >> autoinstall.ini
-	  echo "ssl_cert_organisation=Servisys di Temporini Matteo" >> autoinstall.ini
-	  echo "ssl_cert_organisation_unit=IT department" >> autoinstall.ini
+	  echo "ssl_cert_country=$SSL_COUNTRY" >> autoinstall.ini
+	  echo "ssl_cert_state=$SSL_STATE" >> autoinstall.ini
+	  echo "ssl_cert_locality=$SSL_LOCALITY" >> autoinstall.ini
+	  echo "ssl_cert_organisation=$SSL_ORGANIZATION" >> autoinstall.ini
+	  echo "ssl_cert_organisation_unit=$SSL_ORGUNIT" >> autoinstall.ini
 	  echo "ssl_cert_common_name=$CFG_HOSTNAME_FQDN" >> autoinstall.ini
 	  echo
 	  echo "[expert]" >> autoinstall.ini
 	  echo "mysql_ispconfig_user=ispconfig" >> autoinstall.ini
 	  echo "mysql_ispconfig_password=afStEratXBsgatRtsa42CadwhQ" >> autoinstall.ini
-	  echo "join_multiserver_setup=n" >> autoinstall.ini
-	  echo "mysql_master_hostname=master.example.com" >> autoinstall.ini
-	  echo "mysql_master_root_user=root" >> autoinstall.ini
-	  echo "mysql_master_root_password=ispconfig" >> autoinstall.ini
-	  echo "mysql_master_database=dbispconfig" >> autoinstall.ini
-	  echo "configure_mail=y" >> autoinstall.ini
+	  echo "join_multiserver_setup=$CFG_MULTISERVER" >> autoinstall.ini
+	  echo "mysql_master_hostname=$CFG_MULTISERVER_MASTER_HOSTNAME" >> autoinstall.ini
+	  echo "mysql_master_root_user=$CFG_MULTISERVER_ROOT_USER" >> autoinstall.ini
+	  echo "mysql_master_root_password=$CFG_MULTISERVER_ROOT_PASSWORD" >> autoinstall.ini
+	  echo "mysql_master_database=$CFG_MULTISERVER_DATABASE" >> autoinstall.ini
+	  echo "configure_mail=$CFG_EMAIL" >> autoinstall.ini
 	  echo "configure_jailkit=$CFG_JKIT" >> autoinstall.ini
-	  echo "configure_ftp=y" >> autoinstall.ini
-	  echo "configure_dns=y" >> autoinstall.ini
-	  echo "configure_apache=y" >> autoinstall.ini
+	  echo "configure_ftp=$CFG_FTP" >> autoinstall.ini
+	  echo "configure_dns=$CFG_DNS" >> autoinstall.ini
+	  echo "configure_apache=$CFG_WEB" >> autoinstall.ini
 	  echo "configure_nginx=n" >> autoinstall.ini
 	  echo "configure_firewall=y" >> autoinstall.ini
 	  echo "install_ispconfig_web_interface=$CFG_INTERFACE" >> autoinstall.ini
@@ -56,10 +56,10 @@ InstallISPConfig() {
 	  echo "[update]" >> autoinstall.ini
 	  echo "do_backup=yes" >> autoinstall.ini
 	  echo "mysql_root_password=$CFG_MYSQL_ROOT_PWD" >> autoinstall.ini
-	  echo "mysql_master_hostname=master.example.com" >> autoinstall.ini
-	  echo "mysql_master_root_user=root" >> autoinstall.ini
-	  echo "mysql_master_root_password=ispconfig" >> autoinstall.ini
-	  echo "mysql_master_database=dbispconfig" >> autoinstall.ini
+	  echo "mysql_master_hostname=$CFG_MULTISERVER_MASTER_HOSTNAME" >> autoinstall.ini
+	  echo "mysql_master_root_user=$CFG_MULTISERVER_ROOT_USER" >> autoinstall.ini
+	  echo "mysql_master_root_password=$CFG_MULTISERVER_ROOT_PASSWORD" >> autoinstall.ini
+	  echo "mysql_master_database=$CFG_MULTISERVER_DATABASE" >> autoinstall.ini
 	  echo "reconfigure_permissions_in_master_database=no" >> autoinstall.ini
 	  echo "reconfigure_services=yes" >> autoinstall.ini
 	  echo "ispconfig_port=8080" >> autoinstall.ini

@@ -148,24 +148,32 @@ else
 		PreInstallCheck
 		AskQuestions 
 		InstallBasics 2>> /var/log/ispconfig_setup.log
-		#InstallPostfix 2>> /var/log/ispconfig_setup.log
 		InstallSQLServer 2>> /var/log/ispconfig_setup.log
-		#InstallMTA 2>> /var/log/ispconfig_setup.log
-		#InstallAntiVirus 2>> /var/log/ispconfig_setup.log
+		if [ $CFG_EMAIL == "y" ]; then
+			InstallPostfix 2>> /var/log/ispconfig_setup.log
+			InstallMTA 2>> /var/log/ispconfig_setup.log
+			InstallAntiVirus 2>> /var/log/ispconfig_setup.log
+			InstallWebmail 2>> /var/log/ispconfig_setup.log
+			InstallFix
+		fi	
+		
 		InstallWebServer
-		InstallFTP 2>> /var/log/ispconfig_setup.log
-		#if [ $CFG_QUOTA == "y" ]; then
-		#		InstallQuota 2>> /var/log/ispconfig_setup.log
-		#fi
-		#InstallBind 2>> /var/log/ispconfig_setup.log
+		if [ $CFG_FTP == "y" ]; then
+			InstallFTP 2>> /var/log/ispconfig_setup.log
+		fi	
+		if [ $CFG_QUOTA == "y" ]; then
+				InstallQuota 2>> /var/log/ispconfig_setup.log
+		fi
+		if [ $CFG_DNS == "y" ]; then
+			InstallBind 2>> /var/log/ispconfig_setup.log
+		fi	
         InstallWebStats 2>> /var/log/ispconfig_setup.log
 	    if [ $CFG_JKIT == "y" ]; then
 			InstallJailkit 2>> /var/log/ispconfig_setup.log
 	    fi
 		InstallFail2ban 2>> /var/log/ispconfig_setup.log
-		#InstallWebmail 2>> /var/log/ispconfig_setup.log
 		InstallISPConfig
-		#InstallFix
+		
 		echo -e "${green}Well done ISPConfig installed and configured correctly :D ${NC}"
 		echo "Now you can connect to your ISPConfig installation at https://$CFG_HOSTNAME_FQDN:8080 or https://IP_ADDRESS:8080"
 		echo "You can visit my GitHub profile at https://github.com/servisys/ispconfig_setup/"
